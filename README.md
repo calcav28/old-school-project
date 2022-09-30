@@ -1,10 +1,21 @@
 # My Personal Project
 
-## A subtitle
+For my personal project, I want to make an **interactive, choose your own adventure story game.** In this game, 
+you will play as a character going through a spaceship. The application will allow the player to make their own 
+choices on what the character does throughout the story and experience the outcome of their decision. 
+Some features of the application include:
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+- *Multiple endings.*
+- *Decisions on other characters living and dying.*
+- *Saving your progress wherever you want.*
 
-An example of text with **bold** and *italic* fonts.  
+This project is of interest to me because I want to pursue a career in making video games. I also enjoy writing a lot,
+and an interactive story game allows me to mix both of those things together. 
+It's also a decently simple game to make, and it allows me to be more creative with the story.
+
+## User Stories
+
+- As a user, I want to be able to save my progress to return to later.
+- As a user, I want to be able to add a list of what choices I made as many times as I want. 
+- As a user, I want my choices in the game to have meaning and effect the story.
+- As a user, I want to be able to see my previous choices in my current game.
