@@ -6,17 +6,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GameDataTest {
-    private GameData testGameData;
+public class ItemTest {
     private Item testItem;
 
     @BeforeEach
     void runBefore() {
-        testGameData = new GameData("a0a"); //add parameters here
+        testItem = new Item("cheese slice", 0, 1);
     }
 
     @Test
-    void testConstructor() {
-
+    void testGetName() {
+        assertEquals("cheese slice", testItem.getName());
     }
 }
