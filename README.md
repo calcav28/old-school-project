@@ -17,10 +17,10 @@ It's also a decently simple game to make, and it allows me to be more creative w
 
 - As a user, I want to be able to save my progress.
 - As a user, I want to be able to add an item to a list of items as many times as I want. 
-- As a user, I want to be able to see my previous choices in my current game.
 - As a user, I want to be able to start over again during a game.
 - As a user, I want to be able to see the items I have collected.
 
 ## Future User Stories
 - As a user, I want my choices in the game to have meaning and effect the story.
 - As a user, I want to be able to go back to my saved game.
+- As a user, I want to be able to see my previous choices in my current game.

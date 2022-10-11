@@ -11,26 +11,15 @@ public class GameData {
     // the letter represents what stage the player is on
     // the second number represents what choice in the stage the player chooses
     private String progress;
-    private String item;
-    private List<String> items;
-    private int choice;
 
     // constructs a game with 0a0 for progress
-    public GameData() {
-        progress = "a0a";
-        item = "";
-        items = Collections.emptyList();
+    public GameData(String currentStage) {
+        progress = currentStage;
+
     }
 
     public String getProgress() {
         return progress;
     }
 
-    public String getItem() {
-        return item;
-    }
-
-    public List<String> getItems() {
-        return items;
-    }
 }
