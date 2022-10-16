@@ -1,21 +1,23 @@
 package model;
 
+import model.Item;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class ItemList {
-    List<String> items = new ArrayList<>();
+    List<Item> items;
 
     public ItemList() {
-        items.add("test");
+        items = new ArrayList<>();
     }
 
-    public List<String> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void addItem(String item) {
+    public void addItem(Item item) {
         items.add(item);
     }
 }

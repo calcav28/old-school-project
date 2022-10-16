@@ -2,6 +2,7 @@ package ui;
 
 import model.GameData;
 import model.ItemList;
+import model.Item;
 
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ public class GameApp {
     private String playerName;
     private int choice;
     private ItemList items;
+    private Item cheeseSlice;
 
     public GameApp() {
         runGame();
@@ -20,6 +22,7 @@ public class GameApp {
         input = new Scanner(System.in);
         player = new GameData("a0a");
         items = new ItemList();
+        cheeseSlice = new Item("Cheese Slice", 0, 1);
 
         System.out.println("Welcome to the game! Please enter your name.");
         playerName = input.next();
@@ -68,7 +71,7 @@ public class GameApp {
         choice = input.nextInt();
 
         if (choice == 1) {
-            items.addItem("Cheese Slice");
+            items.addItem(cheeseSlice);
             cheeseRoom2();
         } else if (choice == 2) {
             System.out.println("Alright, your loss!");
@@ -80,20 +83,20 @@ public class GameApp {
         player = new GameData("1a11");
         input = new Scanner(System.in);
 
-        System.out.println("You now have another cheese slice! Do you take another one?");
+        System.out.println("Do you take another one?");
         System.out.println("1. Of course!");
         System.out.println("2. I think this is enough");
         System.out.println("3. See inventory");
         choice = input.nextInt();
 
         if (choice == 1) {
-            items.addItem("Cheese Slice");
+            items.addItem(cheeseSlice);
             cheeseRoom2();
         } else if (choice == 2) {
             System.out.println("Alright, suit yourself!");
             nextRoom();
         } else if (choice == 3) {
-            items.getItems();
+            System.out.println(items.getItems());
             cheeseRoom2();
         }
     }
