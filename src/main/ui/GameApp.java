@@ -68,6 +68,7 @@ public class GameApp {
         System.out.println("As you enter the room, you see a box of cheese slices. Do you take one?");
         System.out.println("1. Take a cheese slice.");
         System.out.println("2. No, I'm lactose intolerant.");
+        System.out.println("3. Go Back to Opening Screen");
         choice = input.nextInt();
 
         if (choice == 1) {
@@ -76,6 +77,8 @@ public class GameApp {
         } else if (choice == 2) {
             System.out.println("Alright, your loss!");
             nextRoom();
+        } else if (choice == 3) {
+            runGame();
         }
     }
 
