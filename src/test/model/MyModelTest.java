@@ -17,6 +17,6 @@ class GameDataTest {
 
     @Test
     void testConstructor() {
-
+    assertEquals("a0a", testGameData.getProgress());
     }
 }

@@ -15,7 +15,9 @@ public class ItemTest {
     }
 
     @Test
-    void testGetName() {
+    void testConstructor() {
         assertEquals("cheese slice", testItem.getName());
+        assertEquals(0, testItem.getDamage());
+        assertEquals(1, testItem.getWeight());
     }
 }

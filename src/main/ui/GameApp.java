@@ -1,6 +1,7 @@
 package ui;
 
 import model.GameData;
+import model.ItemList;
 
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ public class GameApp {
     private GameData player;
     private String playerName;
     private int choice;
+    private ItemList items;
 
     public GameApp() {
         runGame();
@@ -17,6 +19,7 @@ public class GameApp {
     public void runGame() {
         input = new Scanner(System.in);
         player = new GameData("a0a");
+        items = new ItemList();
 
         System.out.println("Welcome to the game! Please enter your name.");
         playerName = input.next();
@@ -41,13 +44,13 @@ public class GameApp {
         choice = input.nextInt();
 
         if (choice == 1) {
-            right();
+            cheeseRoom();
         } else if (choice == 2) {
             left();
         } else if (choice == 3) {
             saveProgress();
         } else if (choice == 4) {
-            showItems();
+            items.getItems();
         } else if (choice == 5) {
             runGame();
         } else if (choice == 6) {
@@ -55,7 +58,7 @@ public class GameApp {
         }
     }
 
-    public void right() {
+    public void cheeseRoom() {
         player = new GameData("1a1");
         input = new Scanner(System.in);
 
@@ -65,9 +68,33 @@ public class GameApp {
         choice = input.nextInt();
 
         if (choice == 1) {
-            //add a cheese slice
+            items.addItem("Cheese Slice");
+            cheeseRoom2();
         } else if (choice == 2) {
+            System.out.println("Alright, your loss!");
             nextRoom();
+        }
+    }
+
+    public void cheeseRoom2() {
+        player = new GameData("1a11");
+        input = new Scanner(System.in);
+
+        System.out.println("You now have another cheese slice! Do you take another one?");
+        System.out.println("1. Of course!");
+        System.out.println("2. I think this is enough");
+        System.out.println("3. See inventory");
+        choice = input.nextInt();
+
+        if (choice == 1) {
+            items.addItem("Cheese Slice");
+            cheeseRoom2();
+        } else if (choice == 2) {
+            System.out.println("Alright, suit yourself!");
+            nextRoom();
+        } else if (choice == 3) {
+            items.getItems();
+            cheeseRoom2();
         }
     }
 
@@ -77,10 +104,6 @@ public class GameApp {
     }
 
     public void saveProgress() {
-
-    }
-
-    public void showItems() {
 
     }
 

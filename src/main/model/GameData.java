@@ -15,7 +15,6 @@ public class GameData {
     // constructs a game with 0a0 for progress
     public GameData(String currentStage) {
         progress = currentStage;
-
     }
 
     public String getProgress() {
