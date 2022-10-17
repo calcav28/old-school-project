@@ -10,24 +10,25 @@ import java.util.Scanner;
 //represents the user interface for the game utilizing the other classes for information
 public class GameApp {
     private Scanner input;
-    private GameData player;
     private GameData savedProgress;
     private String playerName;
     private int choice;
     private ItemList items;
+    private ItemList savedItems;
     private Item cheeseSlice;
 
     public GameApp() {
+        items = new ItemList();
+        savedProgress = new GameData("000");
+        savedItems = new ItemList();
         runGame();
     }
 
     //EFFECTS: runs the Game application and asks player to input name
     public void runGame() {
         input = new Scanner(System.in);
-        player = new GameData("a0a");
-        items = new ItemList();
         cheeseSlice = new Item("Cheese Slice", 0, 1);
-        savedProgress = new GameData("000");
+
 
         System.out.println("Welcome to the game! Please enter your name.");
         playerName = input.next();
@@ -36,7 +37,7 @@ public class GameApp {
     }
 
     //EFFECTS: first section for player after inputting name
-    @SuppressWarnings("methodlength") //currently 26 lines long
+    @SuppressWarnings("methodlength") //over 25 lines long
     public void firstSection() {
 
         input = new Scanner(System.in);
@@ -57,7 +58,7 @@ public class GameApp {
         } else if (choice == 2) {
             left();
         } else if (choice == 3) {
-            savedProgress.getProgress();
+            savedProgress = new GameData("000");
             firstSection();
         } else if (choice == 4) {
             items.getItems();
@@ -65,12 +66,13 @@ public class GameApp {
             runGame();
         } else if (choice == 6) {
             System.out.println("Have a nice day!");
+        } else {
+            firstSection();
         }
     }
 
     //EFFECTS: choice if player goes right from firstSection
     public void cheeseRoom() {
-        player = new GameData("1a1");
         input = new Scanner(System.in);
 
         System.out.println("As you enter the room, you see a box of cheese slices. Do you take one?");
@@ -89,20 +91,21 @@ public class GameApp {
         } else if (choice == 3) {
             runGame();
         } else if (choice == 4) {
-            savedProgress.getProgress();
+            savedProgress = new GameData("1a1");
             cheeseRoom();
         }
     }
 
     //EFFECTS: choice if player chooses a cheese slice
     public void cheeseRoom2() {
-        player = new GameData("1a11");
         input = new Scanner(System.in);
 
         System.out.println("Do you take another cheese slice?");
         System.out.println("1. Of course!");
         System.out.println("2. I think this is enough");
         System.out.println("3. See inventory");
+        System.out.println("4. Save Progress");
+        System.out.println("5. Restart Game");
         choice = input.nextInt();
 
         if (choice == 1) {
@@ -114,18 +117,19 @@ public class GameApp {
         } else if (choice == 3) {
             System.out.println(items.getItems());
             cheeseRoom2();
+        } else if (choice == 4) {
+            savedProgress = new GameData("1a11");
+            savedItems = items;
         }
     }
 
     //EFFECTS: placeholder if player goes left from firstSection
     public void left() {
-        player = new GameData("2a1");
         System.out.println("You Die. The End.");
     }
 
     //EFFECTS: placeholder for later stages of game to be added later
     public void nextRoom() {
-        player = new GameData("1b0");
         System.out.println("You Die. The End.");
     }
 }

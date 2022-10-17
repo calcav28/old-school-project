@@ -11,7 +11,7 @@ class GameDataTest {
 
     @BeforeEach
     void runBefore() {
-        testGameData = new GameData("a0a"); //add parameters here
+        testGameData = new GameData("a0a");
     }
 
     @Test

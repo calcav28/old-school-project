@@ -1,8 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 // represents a game with progress
 public class GameData {
@@ -12,7 +9,7 @@ public class GameData {
     // the second number represents what choice in the stage the player chooses
     private String progress;
 
-    // constructs a game with 0a0 for progress
+    // constructs the progress
     public GameData(String currentStage) {
         progress = currentStage;
     }

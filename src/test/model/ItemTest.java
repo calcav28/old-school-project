@@ -19,5 +19,7 @@ public class ItemTest {
         assertEquals("cheese slice", testItem.getName());
         assertEquals(0, testItem.getDamage());
         assertEquals(1, testItem.getWeight());
+        assertEquals(3, testItem.hitEnemy(3));
+        assertEquals(0, testItem.hitEnemy(0));
     }
 }
