@@ -61,7 +61,10 @@ public class GameApp {
             savedProgress = new GameData("000");
             firstSection();
         } else if (choice == 4) {
-            items.getItems();
+            for (Item item: items.getItems()) {
+                System.out.println(item.getName());
+            }
+            firstSection();
         } else if (choice == 5) {
             runGame();
         } else if (choice == 6) {
@@ -105,7 +108,7 @@ public class GameApp {
         System.out.println("2. I think this is enough");
         System.out.println("3. See inventory");
         System.out.println("4. Save Progress");
-        System.out.println("5. Restart Game");
+        System.out.println("5. Go Back to Opening Screen");
         choice = input.nextInt();
 
         if (choice == 1) {
@@ -115,7 +118,9 @@ public class GameApp {
             System.out.println("Alright, suit yourself!");
             nextRoom();
         } else if (choice == 3) {
-            System.out.println(items.getItems());
+            for (Item item: items.getItems()) {
+                System.out.println(item.getName());
+            }
             cheeseRoom2();
         } else if (choice == 4) {
             savedProgress = new GameData("1a11");
