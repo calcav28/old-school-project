@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// represents a game with progress and items
+// represents a game with progress
 public class GameData {
     // progress is represented with 1 number, a letter, and another number
     // the first number represents what path the player is on

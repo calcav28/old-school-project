@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/*
+represents an arbitrary long list of items
+*/
 public class ItemList {
     List<Item> items;
 

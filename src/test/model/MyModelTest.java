@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameDataTest {
     private GameData testGameData;
-    private Item testItem;
 
     @BeforeEach
     void runBefore() {
