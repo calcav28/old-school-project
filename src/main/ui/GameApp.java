@@ -6,10 +6,8 @@ import model.Item;
 
 import java.util.Scanner;
 
-/*
-represents the user interface for the game utilizing the other classes for information
-*/
 
+//represents the user interface for the game utilizing the other classes for information
 public class GameApp {
     private Scanner input;
     private GameData player;
@@ -23,7 +21,7 @@ public class GameApp {
         runGame();
     }
 
-    //starts the game
+    //EFFECTS: runs the Game application and asks player to input name
     public void runGame() {
         input = new Scanner(System.in);
         player = new GameData("a0a");
@@ -37,7 +35,7 @@ public class GameApp {
         firstSection();
     }
 
-    //first section for player after inputting name
+    //EFFECTS: first section for player after inputting name
     @SuppressWarnings("methodlength") //currently 26 lines long
     public void firstSection() {
 
@@ -70,7 +68,7 @@ public class GameApp {
         }
     }
 
-    //choice if player goes right from firstSection
+    //EFFECTS: choice if player goes right from firstSection
     public void cheeseRoom() {
         player = new GameData("1a1");
         input = new Scanner(System.in);
@@ -96,7 +94,7 @@ public class GameApp {
         }
     }
 
-    //choice if player chooses a cheese slice
+    //EFFECTS: choice if player chooses a cheese slice
     public void cheeseRoom2() {
         player = new GameData("1a11");
         input = new Scanner(System.in);
@@ -119,13 +117,13 @@ public class GameApp {
         }
     }
 
-    //placeholder if player goes left from firstSection
+    //EFFECTS: placeholder if player goes left from firstSection
     public void left() {
         player = new GameData("2a1");
         System.out.println("You Die. The End.");
     }
 
-    //placeholder for later stages of game to be added later
+    //EFFECTS: placeholder for later stages of game to be added later
     public void nextRoom() {
         player = new GameData("1b0");
         System.out.println("You Die. The End.");

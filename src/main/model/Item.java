@@ -1,18 +1,12 @@
 package model;
 
-/*
-Represents an item with 3 properties:
-String name: the name of the item
-int damage: the amount of damage the item can do
-int weight: the amount the item weighs
-*/
-
-
+//Represents an item with 3 properties:
 public class Item {
-    private String name;
-    private int damage;
-    private int weight;
+    private String name;   // the name of the item
+    private int damage;    // the amount of damage the item can do
+    private int weight;    // the amount the item weighs
 
+    //EFFECTS: constructs an item
     public Item(String itemName, int itemDamage, int itemWeight) {
         name = itemName;
         damage = itemDamage;
