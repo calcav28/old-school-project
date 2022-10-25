@@ -3,8 +3,12 @@ package ui;
 import model.GameData;
 import model.ItemList;
 import model.Item;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 //represents the user interface for the game utilizing the other classes for information
@@ -16,6 +20,7 @@ public class GameApp {
     private ItemList items;
     private ItemList savedItems;
     private Item cheeseSlice;
+    private JsonWriter jsonWriter;
 
     public GameApp() {
         items = new ItemList();
