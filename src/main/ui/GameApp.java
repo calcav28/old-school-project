@@ -21,12 +21,27 @@ public class GameApp {
     private ItemList savedItems;
     private Item cheeseSlice;
     private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     public GameApp() {
         items = new ItemList();
         savedProgress = new GameData("000");
         savedItems = new ItemList();
         runGame();
+    }
+
+    public void titleScreen() {
+        input = new Scanner(System.in);
+
+        System.out.println("Hello. What would you like to do?");
+        System.out.println("1. Start New Game");
+        System.out.println("2. Load Saved Game");
+
+        if (choice == 1) {
+            runGame();
+        } else {
+            left(); //placeholder for actual load save
+        }
     }
 
     //EFFECTS: runs the Game application and asks player to input name
@@ -63,15 +78,14 @@ public class GameApp {
         } else if (choice == 2) {
             left();
         } else if (choice == 3) {
-            savedProgress = new GameData("000");
-            firstSection();
+            // put save data here
         } else if (choice == 4) {
             for (Item item: items.getItems()) {
                 System.out.println(item.getName());
             }
             firstSection();
         } else if (choice == 5) {
-            runGame();
+            titleScreen();
         } else if (choice == 6) {
             System.out.println("Have a nice day!");
         } else {
@@ -131,6 +145,14 @@ public class GameApp {
             savedProgress = new GameData("1a11");
             savedItems = items;
         }
+    }
+
+    private void saveGame() {
+
+    }
+
+    private void loadGame() {
+
     }
 
     //EFFECTS: placeholder if player goes left from firstSection
