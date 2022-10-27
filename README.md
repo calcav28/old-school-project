@@ -14,8 +14,8 @@ and an interactive story game allows me to mix both of those things together.
 It's also a decently simple game to make, and it allows me to be more creative with the story.
 
 ## Current User Stories
-- As a user, I want to be able to save my progress.
-- As a user, I want to be able to go back to my saved game.
+- As a user, I want to be able to save my progress and items I have collected.
+- As a user, I want to be able to go back to my saved game from the beginning of the game.
 
 ## Completed User Stories
 - As a user, I want to be able to choose different paths through the game

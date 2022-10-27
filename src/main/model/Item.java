@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 //Represents an item with 3 properties:
-public class Item {
+public class Item implements Writable {
     private String name;   // the name of the item
     private int damage;    // the amount of damage the item can do
     private int weight;    // the amount the item weighs
@@ -31,6 +34,15 @@ public class Item {
         } else {
             return mobHealth - getDamage();
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("item", name);
+        json.put("damage", damage);
+        json.put("weight", weight);
+        return json;
     }
 
     public int getWeight() {

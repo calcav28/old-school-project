@@ -1,9 +1,11 @@
 package persistence;
 
+import model.GameData;
+
 import org.json.JSONObject;
 import java.io.*;
 
-//Code was modelled from JsonWriter class from:
+//Code is modelled heavily from code in JsonWriter class from:
 //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 public class JsonWriter {
@@ -15,9 +17,14 @@ public class JsonWriter {
         this.destination = destination;
     }
 
-    //public void open() throws FileNotFoundException {
-    //    writer = new PrintWriter(new File(destiantion));
-    //}
+    public void open() throws FileNotFoundException {
+        writer = new PrintWriter(new File(destination));
+    }
+
+    public void write(GameData gd) {
+        JSONObject json = gd.toJson();
+        saveToFile(json.toString(5));
+    }
 
     public void close() {
         writer.close();
