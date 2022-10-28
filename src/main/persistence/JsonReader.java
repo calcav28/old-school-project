@@ -56,9 +56,9 @@ public class JsonReader {
     }
 
     private void addItem(GameData gd, JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        int damage = jsonObject.getInt("damage");
-        int weight = jsonObject.getInt("weight");
+        String name = jsonObject.getString("itemName");
+        int damage = jsonObject.getInt("itemDamage");
+        int weight = jsonObject.getInt("itemWeight");
         Item item = new Item(name, damage, weight);
         gd.addItem(item);
     }

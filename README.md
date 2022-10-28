@@ -26,3 +26,7 @@ It's also a decently simple game to make, and it allows me to be more creative w
 ## Future User Stories
 - As a user, I want my choices in the game to have meaning and effect the story.
 - As a user, I want to be able to see my previous choices in my current game.
+
+Citations:
+JSON elements of code contained in model, persistence, ui, and test folders are modelled from code from:
+https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git 

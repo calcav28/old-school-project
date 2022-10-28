@@ -39,9 +39,9 @@ public class Item implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("item", name);
-        json.put("damage", damage);
-        json.put("weight", weight);
+        json.put("itemName", name);
+        json.put("itemDamage", damage);
+        json.put("itemWeight", weight);
         return json;
     }
 
