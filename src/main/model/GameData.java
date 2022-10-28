@@ -27,7 +27,6 @@ public class GameData implements Writable {
         items = new ArrayList<>();
     }
 
-    //EFFECTS: returns items
     public List<Item> getItems() {
         return items;
     }
@@ -51,6 +50,7 @@ public class GameData implements Writable {
         return json;
     }
 
+    //EFFECTS: gives all items in items as a JSON array
     private JSONArray itemsToJson() {
         JSONArray jsonArray = new JSONArray();
 

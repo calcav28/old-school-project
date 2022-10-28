@@ -20,6 +20,17 @@ public class JsonWriterTest {
         assertEquals(itemWeight, item.getWeight());
     }
 
+    @Test
+    void testWritingInvalidFile() {
+        try {
+            GameData gd = new GameData("game");
+            JsonWriter writer = new JsonWriter("./data/my\0illegal\312313.json");
+            writer.open();
+            fail("IOException was expected");
+        } catch (IOException e) {
+
+        }
+    }
 
     @Test
     void testWritingGeneralGame() {

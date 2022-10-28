@@ -1,0 +1,15 @@
+{
+     "progress": "test1",
+     "items": [
+          {
+               "itemDamage": 1,
+               "itemName": "testname1",
+               "itemWeight": 1
+          },
+          {
+               "itemDamage": 2,
+               "itemName": "testname2",
+               "itemWeight": 2
+          }
+     ]
+}
