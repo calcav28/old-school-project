@@ -3,6 +3,9 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+//toJSON method is modelled by code from:
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 //Represents an item with 3 properties:
 public class Item implements Writable {
     private String name;   // the name of the item

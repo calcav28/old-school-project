@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//tests are modelled after tests in JsonWriterTest in:
+//tests are modelled after tests in JsonWriterTest and JsonReaderTest in:
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 public class JsonTest {
@@ -27,7 +27,7 @@ public class JsonTest {
             GameData gd = reader.read();
             fail("IOException expected");
         } catch (IOException e) {
-            // pass
+
         }
     }
 

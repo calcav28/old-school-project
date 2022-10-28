@@ -11,6 +11,8 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
+//json elements of file such as methods are modelled after code from WorkRoomApp in:
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 //represents the user interface for the game utilizing the other classes for information
 public class GameApp {
