@@ -12,12 +12,23 @@ import static org.junit.jupiter.api.Assertions.*;
 //tests are modelled after tests in JsonWriterTest in:
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
-public class JsonWriterTest {
+public class JsonTest {
 
     protected void checkItem(String itemName, int itemDamage, int itemWeight, Item item) {
         assertEquals(itemName, item.getName());
         assertEquals(itemDamage, item.getDamage());
         assertEquals(itemWeight, item.getWeight());
+    }
+
+    @Test
+    void testReadingNonExistentFile() {
+        JsonReader reader = new JsonReader("./data/noFile.json");
+        try {
+            GameData gd = reader.read();
+            fail("IOException expected");
+        } catch (IOException e) {
+            // pass
+        }
     }
 
     @Test
