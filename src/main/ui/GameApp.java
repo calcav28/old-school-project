@@ -43,14 +43,18 @@ public class GameApp {
 
         choice = input.nextInt();
 
-        if (choice == 1) {
-            runGame();
-        } else if (choice == 2) {
-            loadGame();
-        } else if (choice == 3) {
-            System.out.println("Have a nice day!");
-        } else {
-            titleScreen();
+        switch (choice) {
+            case 1:
+                runGame();
+                break;
+            case 2:
+                loadGame();
+                break;
+            case 3:
+                System.out.println("Have a nice day!");
+                break;
+            default:
+                titleScreen();
         }
     }
 
@@ -180,6 +184,7 @@ public class GameApp {
                 break;
             case 5:
                 titleScreen();
+                break;
             default:
                 p1s1c1();
         }
@@ -210,13 +215,13 @@ public class GameApp {
                 case "p1s1c1":
                     p1s1c1();
                     break;
+                default:
+                    System.out.println("Goodbye!");
             }
         } catch (IOException e) {
             System.out.println("You do not have a saved game!");
         }
     }
-
-    //use a switch statement to load into level
 
     //EFFECTS: placeholder if player goes left from p0s0c0
     public void p2s1c0() {
