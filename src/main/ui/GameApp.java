@@ -1,6 +1,5 @@
 package ui;
 
-import model.ItemList;
 import model.GameData;
 import model.Item;
 import persistence.JsonReader;
@@ -21,19 +20,21 @@ public class GameApp {
     private String playerName;
     private int choice;
     private GameData game;
-    private ItemList items;
+    private String stage;
     private Item cheeseSlice;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
     public GameApp() {
-        items = new ItemList();
+        stage = "";
+        game = new GameData(stage);
 
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         titleScreen();
     }
 
+    //represents the title screen the player arrives at when they start the game
     public void titleScreen() {
         input = new Scanner(System.in);
         choice = 0;
@@ -78,6 +79,8 @@ public class GameApp {
 
         input = new Scanner(System.in);
         choice = 0;
+        stage = "p0s0c0";
+        game.setProgress(stage);
 
         System.out.println("You are inside a spaceship. The Captain wants you to get rid of our cargo.");
         System.out.println("The Captain said that the cargo is to the right. Which way do you go?");
@@ -97,11 +100,10 @@ public class GameApp {
                 p2s1c0();
                 break;
             case 3:
-                game = new GameData("p0s0c0");
                 saveGame();
                 break;
             case 4:
-                for (Item item : items.getItems()) {
+                for (Item item : game.getItems()) {
                     System.out.println(item.getName());
                 }
                 p0s0c0();
@@ -121,7 +123,8 @@ public class GameApp {
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void p1s1c0() {
         input = new Scanner(System.in);
-        game = new GameData("p1s1c0");
+        stage = "p1s1c0";
+        game.setProgress(stage);
 
         System.out.println("As you enter the room, you see a box of cheese slices. Do you take one?");
         System.out.println("1. Take a cheese slice.");
@@ -132,7 +135,7 @@ public class GameApp {
 
         switch (choice) {
             case 1:
-                items.addItem(cheeseSlice);
+                game.addItem(cheeseSlice);
                 p1s1c1();
                 break;
             case 2:
@@ -155,7 +158,8 @@ public class GameApp {
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void p1s1c1() {
         input = new Scanner(System.in);
-        game = new GameData("p1s1c1");
+        stage = "p1s1c1";
+        game.setProgress(stage);
 
         System.out.println("Do you take another cheese slice?");
         System.out.println("1. Of course!");
@@ -167,7 +171,7 @@ public class GameApp {
 
         switch (choice) {
             case 1:
-                items.addItem(cheeseSlice);
+                game.addItem(cheeseSlice);
                 p1s1c1();
                 break;
             case 2:
@@ -175,7 +179,7 @@ public class GameApp {
                 nextRoom();
                 break;
             case 3:
-                for (Item item : items.getItems()) {
+                for (Item item : game.getItems()) {
                     System.out.println(item.getName());
                 }
                 p1s1c1();
@@ -204,6 +208,8 @@ public class GameApp {
         }
     }
 
+    //EFFECTS: reads game with saved progress and items, then goes to stage
+    // depending on what progress is
     private void loadGame() {
         try {
             game = jsonReader.read();

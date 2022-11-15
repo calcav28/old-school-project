@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
 //represents an arbitrary long list of items
 public class ItemList {
     List<Item> items;
@@ -23,3 +23,4 @@ public class ItemList {
         items.add(item);
     }
 }
+*/

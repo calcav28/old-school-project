@@ -45,6 +45,7 @@ public class JsonReader {
     //EFFECTS: gets gamedata from JSON object and returns it
     private GameData giveGameData(JSONObject jsonObject) {
         String progress = jsonObject.getString("progress");
+//        String items = jsonObject.getString("items");
         GameData gd = new GameData(progress);
         addItems(gd, jsonObject);
         return gd;

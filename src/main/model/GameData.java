@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //json elements of file are modelled after code in WorkRoomApp class from:
@@ -23,12 +24,12 @@ public class GameData implements Writable {
 
     //EFFECTS: constructs game data with an empty list and empty progress
     public GameData(String currentStage) {
-        this.progress = currentStage;
+        progress = currentStage;
         items = new ArrayList<>();
     }
 
     public List<Item> getItems() {
-        return items;
+        return Collections.unmodifiableList(items);
     }
 
 
@@ -42,6 +43,13 @@ public class GameData implements Writable {
         return progress;
     }
 
+    //EFFECTS: sets progress of game to currentProgress
+    //MODIFIES: progress
+    public void setProgress(String currentProgress) {
+        progress = currentProgress;
+    }
+
+    //EFFECTS: writes objects to Json
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
