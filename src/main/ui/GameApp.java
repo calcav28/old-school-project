@@ -12,9 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import java.util.Scanner;
 
@@ -109,7 +106,7 @@ public class GameApp extends JPanel implements ActionListener {
         cheeseSlice = new Item("Cheese Slice", 0, 1);
 
         JFrame frame = new JFrame();
-        frame.setSize(500, 500);
+        frame.setSize(WIDTH, HEIGHT);
         frame.setTitle("Please Input Your Name:");
         frame.setResizable(false);
 
@@ -154,49 +151,46 @@ public class GameApp extends JPanel implements ActionListener {
         label2.setHorizontalTextPosition(SwingConstants.CENTER);
 
         JPanel labelPanel = new JPanel();
-        labelPanel.setSize(WIDTH / 2, HEIGHT / 2);
-        labelPanel.setLocation(100, 50);
+        labelPanel.setBounds(WIDTH - WIDTH, HEIGHT - HEIGHT, WIDTH, HEIGHT);
         labelPanel.add(label1);
         labelPanel.add(label2);
 
 
-        JButton btn1 = new JButton("1. Right");
+        JButton btn1 = new JButton("Right");
         btn1.addActionListener(this);
         btn1.setActionCommand("p1s1c0");
         JPanel btn1Panel = new JPanel();
-        btn1Panel.setSize(WIDTH / 10, HEIGHT / 10);
-        btn1Panel.setLocation(100,100);
+        btn1Panel.setBounds(WIDTH / 10, HEIGHT / 10, WIDTH, HEIGHT);
         btn1Panel.add(btn1);
 
-        JButton btn2 = new JButton("2. Left");
+        JButton btn2 = new JButton("Left");
         btn2.addActionListener(this);
         btn2.setActionCommand("p2s1c0");
         JPanel btn2Panel = new JPanel();
-        btn2Panel.setSize(100, 100);
+        btn2Panel.setSize(WIDTH / 10, HEIGHT / 10);
         btn2Panel.setLocation(100,200);
         btn2Panel.add(btn2);
 
-        JButton btn3 = new JButton("3. Save Game");
+        JButton btn3 = new JButton("Save Game");
         btn3.addActionListener(this);
         btn3.setActionCommand("saveGame");
         JPanel btn3Panel = new JPanel();
-        btn3Panel.setSize(120, 100);
+        btn3Panel.setSize(WIDTH / 9, HEIGHT / 9);
         btn3Panel.setLocation(100,300);
         btn3Panel.add(btn3);
 
-        JButton btn4 = new JButton("4. Go Back to Title Screen");
+        JButton btn4 = new JButton("Go Back to Title Screen");
         btn4.addActionListener(this);
         btn4.setActionCommand("titleScreen");
         JPanel btn4Panel = new JPanel();
-        btn4Panel.setSize(300, 100);
-        btn4Panel.setLocation(100,400);
+        btn4Panel.setBounds(WIDTH / 5, HEIGHT / 5, WIDTH / 10, HEIGHT / 10);
         btn4Panel.add(btn4);
 
-        frame.add(labelPanel);
-        frame.add(btn1Panel);
-        frame.add(btn2Panel);
-        frame.add(btn3Panel);
-        frame.add(btn4Panel);
+        frame.add(labelPanel, BorderLayout.PAGE_START);
+        frame.add(btn1Panel, BorderLayout.EAST);
+        frame.add(btn2Panel, BorderLayout.WEST);
+        frame.add(btn3Panel, BorderLayout.CENTER);
+        frame.add(btn4Panel, BorderLayout.SOUTH);
         frame.setVisible(true);
 
     }
@@ -208,35 +202,53 @@ public class GameApp extends JPanel implements ActionListener {
         stage = "p1s1c0";
         game.setProgress(stage);
 
+        JFrame frame = new JFrame();
+        frame.setSize(WIDTH, HEIGHT);
 
+        JLabel label1 = new JLabel();
+        label1.setText("As you enter the room, you see a box of cheese. Do you take one?");
+        label1.setSize(25, 25);
+        JPanel labelPanel = new JPanel();
+        labelPanel.setBounds(WIDTH - WIDTH, HEIGHT - HEIGHT, WIDTH, HEIGHT);
+        labelPanel.add(label1);
 
+        JButton btn1 = new JButton("Yes!");
+        btn1.addActionListener(this);
+        btn1.setActionCommand("p1s1c1");
+        JPanel btn1Panel = new JPanel();
+        btn1Panel.setBounds(WIDTH / 10, HEIGHT / 10, WIDTH, HEIGHT);
+        btn1Panel.add(btn1);
 
-        System.out.println("As you enter the room, you see a box of cheese slices. Do you take one?");
-        System.out.println("1. Take a cheese slice.");
-        System.out.println("2. No, I'm lactose intolerant.");
-        System.out.println("3. Go Back to Title Screen");
-        System.out.println("4. Save Progress");
-        choice = input.nextInt();
+        JButton btn2 = new JButton("I'm Good");
+        btn2.addActionListener(this);
+        btn2.setActionCommand("p2s1c0");
+        JPanel btn2Panel = new JPanel();
+        btn2Panel.setSize(WIDTH / 10, HEIGHT / 10);
+        btn2Panel.setLocation(100,200);
+        btn2Panel.add(btn2);
 
-        switch (choice) {
-            case 1:
-                game.addItem(cheeseSlice);
-                p1s1c1();
-                break;
-            case 2:
-                System.out.println("Alright, your loss!");
-                nextRoom();
-                break;
-            case 3:
-                runGame();
-                break;
-            case 4:
-                saveGame();
-                p1s1c0();
-                break;
-            default:
-                p1s1c0();
-        }
+        JButton btn3 = new JButton("Save Game");
+        btn3.addActionListener(this);
+        btn3.setActionCommand("saveGame");
+        JPanel btn3Panel = new JPanel();
+        btn3Panel.setSize(WIDTH / 9, HEIGHT / 9);
+        btn3Panel.setLocation(100,300);
+        btn3Panel.add(btn3);
+
+        JButton btn4 = new JButton("Go Back to Title Screen");
+        btn4.addActionListener(this);
+        btn4.setActionCommand("titleScreen");
+        JPanel btn4Panel = new JPanel();
+        btn4Panel.setBounds(WIDTH / 5, HEIGHT / 5, WIDTH / 10, HEIGHT / 10);
+        btn4Panel.add(btn4);
+
+        frame.add(labelPanel, BorderLayout.PAGE_START);
+        frame.add(btn1Panel, BorderLayout.EAST);
+        frame.add(btn2Panel, BorderLayout.WEST);
+        frame.add(btn3Panel, BorderLayout.CENTER);
+        frame.add(btn4Panel, BorderLayout.SOUTH);
+        frame.setVisible(true);
+
     }
 
     //EFFECTS: choice if player chooses a cheese slice
@@ -246,39 +258,68 @@ public class GameApp extends JPanel implements ActionListener {
         stage = "p1s1c1";
         game.setProgress(stage);
 
-        System.out.println("Do you take another cheese slice?");
-        System.out.println("1. Of course!");
-        System.out.println("2. I think this is enough");
-        System.out.println("3. See inventory");
-        System.out.println("4. Save Progress");
-        System.out.println("5. Go Back to Opening Screen");
-        choice = input.nextInt();
+        JFrame frame = new JFrame();
+        frame.setSize(WIDTH, HEIGHT);
 
-        switch (choice) {
-            case 1:
-                game.addItem(cheeseSlice);
-                p1s1c1();
-                break;
-            case 2:
-                System.out.println("Alright, suit yourself!");
-                nextRoom();
-                break;
-            case 3:
-                for (Item item : game.getItems()) {
-                    System.out.println(item.getName());
-                }
-                p1s1c1();
-                break;
-            case 4:
-                saveGame();
-                p1s1c1();
-                break;
-            case 5:
-                runGame();
-                break;
-            default:
-                p1s1c1();
+        JLabel label1 = new JLabel();
+        label1.setText("Do you take another one?");
+        label1.setSize(25, 25);
+        JPanel labelPanel = new JPanel();
+        labelPanel.setBounds(WIDTH - WIDTH, HEIGHT - HEIGHT, WIDTH, HEIGHT);
+        labelPanel.add(label1);
+
+        JButton btn1 = new JButton("Yes!");
+        btn1.addActionListener(this);
+        btn1.setActionCommand("p1s1c1");
+        JPanel btn1Panel = new JPanel();
+        btn1Panel.setBounds(WIDTH / 10, HEIGHT / 10, WIDTH, HEIGHT);
+        btn1Panel.add(btn1);
+
+        JButton btn2 = new JButton("I'm Good");
+        btn2.addActionListener(this);
+        btn2.setActionCommand("p2s1c0");
+        JPanel btn2Panel = new JPanel();
+        btn2Panel.setSize(WIDTH / 10, HEIGHT / 10);
+        btn2Panel.setLocation(100,200);
+        btn2Panel.add(btn2);
+
+        JButton btn3 = new JButton("Save Game");
+        btn3.addActionListener(this);
+        btn3.setActionCommand("saveGame");
+        JPanel btn3Panel = new JPanel();
+        btn3Panel.setSize(WIDTH / 9, HEIGHT / 9);
+        btn3Panel.setLocation(100,300);
+        btn3Panel.add(btn3);
+
+        JButton btn4 = new JButton("Go Back to Title Screen");
+        btn4.addActionListener(this);
+        btn4.setActionCommand("titleScreen");
+        JPanel btn4Panel = new JPanel();
+        btn4Panel.setBounds(WIDTH / 5, HEIGHT / 5, WIDTH / 10, HEIGHT / 10);
+        btn4Panel.add(btn4);
+
+        JButton btn5 = new JButton("Show Inventory");
+        btn5.addActionListener(this);
+        btn5.setActionCommand("showInventory");
+        JPanel btn5Panel = new JPanel();
+        btn5Panel.setBounds(WIDTH / 6, HEIGHT / 6, WIDTH / 10, HEIGHT  / 10);
+        btn5Panel.add(btn5);
+
+        frame.add(labelPanel, BorderLayout.PAGE_START);
+        frame.add(btn1Panel, BorderLayout.EAST);
+        frame.add(btn2Panel, BorderLayout.WEST);
+        frame.add(btn3Panel, BorderLayout.CENTER);
+        frame.add(btn4Panel, BorderLayout.SOUTH);
+        frame.add(btn5Panel, BorderLayout.PAGE_END);
+        frame.setVisible(true);
+
+    }
+
+    private String getListOfItems() {
+        for (Item item : game.getItems()) {
+            return item.getName();
         }
+        return null;
     }
 
     //EFFECTS: saves progress and list of items collected
@@ -341,8 +382,14 @@ public class GameApp extends JPanel implements ActionListener {
                 p0s0c0();
                 break;
             case "p1s1c0":
+                game.addItem(cheeseSlice);
                 p1s1c0();
                 break;
+            case "p1s1c1":
+                p1s1c1();
+                break;
+            case "showInventory":
+                getListOfItems();
             case "p2s1c0":
                 p2s1c0();
                 break;
