@@ -30,3 +30,16 @@ It's also a decently simple game to make, and it allows me to be more creative w
 Citations:
 JSON elements of code contained in model, persistence, ui, and test folders are modelled from code from:
 https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git 
+
+# Instructions for Grader
+- You can generate the first required event related to adding Xs to a Y by clicking on the "Yes!" button. To get to this button,
+from the beginning you must click:
+- Start New Game
+- Right
+- Yes!
+That will add one X to Y.
+- You can generate the second required event related to adding Xs to a Y by clicking yes on the top right again. You can do this as many times as you want.
+- You can locate my visual component on the frame after clicking Right.
+- You can save the state of my application by clicking save game at any point in the game after the opening screen
+- You can reload the state of my application by going back to the title screen (clicking the button on screen or closing application)
+and then clicking "Load Saved Game" at the top left

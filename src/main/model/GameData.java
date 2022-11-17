@@ -37,7 +37,6 @@ public class GameData implements Writable {
         return items.size();
     }
 
-
     //EFFECTS: adds an item to a list of items
     //MODIFIES: item
     public void addItem(Item item) {
@@ -48,6 +47,7 @@ public class GameData implements Writable {
         return progress;
     }
 
+    //EFFECTS: clears all items in gameData
     public void clearItems() {
         items.clear();
     }
@@ -75,16 +75,6 @@ public class GameData implements Writable {
             jsonArray.put(item.toJson());
         }
         return jsonArray;
-    }
-
-    public List<String> getListOfItems() {
-        List<String> names = new ArrayList<>();
-        for (Item item : GameData.getItems()) {
-            String name = item.getName();
-            names.add(name);
-            return names;
-        }
-        return names;
     }
 
 
