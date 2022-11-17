@@ -1,6 +1,10 @@
 package ui;
 
 import model.GameData;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 import model.Item;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -10,8 +14,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 
 import java.util.Scanner;
 
@@ -32,10 +41,13 @@ public class GameApp extends JPanel implements ActionListener {
 
     private JLabel questionLabel;
     private JTextField playerNameInput;
-    private JTextField playerNumberInput;
+    private JList list;
+    private DefaultListModel listModel;
+    private BufferedImage img;
 
-    private static final int WIDTH = 1000;
-    private static final int HEIGHT = 1000;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 800;
+
 
     //Starts the player at a title screen
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -43,6 +55,7 @@ public class GameApp extends JPanel implements ActionListener {
         super(Boolean.parseBoolean("Video Game"));
         stage = "";
         game = new GameData(stage);
+        cheeseSlice = new Item("Cheese Slice", 0, 1);
 
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -92,7 +105,7 @@ public class GameApp extends JPanel implements ActionListener {
         btn2.setActionCommand("TitleChoice2");
         btn3.setActionCommand("TitleChoice3");
         frame.add(questionPanel, BorderLayout.NORTH);
-        questionPanel.setLocation(WIDTH / 2,HEIGHT - HEIGHT);
+        questionPanel.setLocation(WIDTH / 2, 0);
         frame.add(buttonFrame1, BorderLayout.CENTER);
         frame.add(buttonFrame2, BorderLayout.WEST);
         frame.add(buttonFrame3, BorderLayout.EAST);
@@ -103,7 +116,6 @@ public class GameApp extends JPanel implements ActionListener {
     //EFFECTS: runs the Game application and asks player to input name
     public void runGame() {
         //input = new Scanner(System.in);
-        cheeseSlice = new Item("Cheese Slice", 0, 1);
 
         JFrame frame = new JFrame();
         frame.setSize(WIDTH, HEIGHT);
@@ -141,19 +153,17 @@ public class GameApp extends JPanel implements ActionListener {
         frame.setSize(WIDTH, HEIGHT);
 
         JLabel label1 = new JLabel();
-        label1.setText("You are inside a spaceship. The captain wants you to get rid of our cargo.");
+        label1.setText("You are inside a spaceship. "
+                + "The captain wants you to get rid of our cargo. Do you go left or right?");
         label1.setSize(25, 25);
-        label1.setHorizontalTextPosition(SwingConstants.CENTER);
-
         JLabel label2 = new JLabel();
         label2.setText("The Captain said that the cargo is to the right. Which way do you go?");
         label2.setSize(25, 25);
-        label2.setHorizontalTextPosition(SwingConstants.CENTER);
 
         JPanel labelPanel = new JPanel();
-        labelPanel.setBounds(WIDTH - WIDTH, HEIGHT - HEIGHT, WIDTH, HEIGHT);
-        labelPanel.add(label1);
-        labelPanel.add(label2);
+        labelPanel.setBounds(0, 0, WIDTH, HEIGHT);
+        labelPanel.add(label1, BorderLayout.NORTH);
+        labelPanel.add(label2, BorderLayout.SOUTH);
 
 
         JButton btn1 = new JButton("Right");
@@ -168,7 +178,7 @@ public class GameApp extends JPanel implements ActionListener {
         btn2.setActionCommand("p2s1c0");
         JPanel btn2Panel = new JPanel();
         btn2Panel.setSize(WIDTH / 10, HEIGHT / 10);
-        btn2Panel.setLocation(100,200);
+        btn2Panel.setLocation(100, 200);
         btn2Panel.add(btn2);
 
         JButton btn3 = new JButton("Save Game");
@@ -176,7 +186,7 @@ public class GameApp extends JPanel implements ActionListener {
         btn3.setActionCommand("saveGame");
         JPanel btn3Panel = new JPanel();
         btn3Panel.setSize(WIDTH / 9, HEIGHT / 9);
-        btn3Panel.setLocation(100,300);
+        btn3Panel.setLocation(100, 300);
         btn3Panel.add(btn3);
 
         JButton btn4 = new JButton("Go Back to Title Screen");
@@ -201,15 +211,24 @@ public class GameApp extends JPanel implements ActionListener {
         input = new Scanner(System.in);
         stage = "p1s1c0";
         game.setProgress(stage);
+        listModel = new DefaultListModel();
+
+        ImageIcon icon = new ImageIcon("src/main/ui/images/icon.jpg");
 
         JFrame frame = new JFrame();
         frame.setSize(WIDTH, HEIGHT);
+        JLabel imgLabel = new JLabel();
+        imgLabel.setSize(800, 800);
+        imgLabel.setIcon(icon);
+        imgLabel.setLayout(new BorderLayout());
+        imgLabel.setOpaque(true);
+        frame.setContentPane(imgLabel);
 
         JLabel label1 = new JLabel();
         label1.setText("As you enter the room, you see a box of cheese. Do you take one?");
         label1.setSize(25, 25);
         JPanel labelPanel = new JPanel();
-        labelPanel.setBounds(WIDTH - WIDTH, HEIGHT - HEIGHT, WIDTH, HEIGHT);
+        labelPanel.setBounds(0, 0, WIDTH, HEIGHT);
         labelPanel.add(label1);
 
         JButton btn1 = new JButton("Yes!");
@@ -224,29 +243,32 @@ public class GameApp extends JPanel implements ActionListener {
         btn2.setActionCommand("p2s1c0");
         JPanel btn2Panel = new JPanel();
         btn2Panel.setSize(WIDTH / 10, HEIGHT / 10);
-        btn2Panel.setLocation(100,200);
+        btn2Panel.setLocation(100, 200);
         btn2Panel.add(btn2);
+
+        JButton btn4 = new JButton("Go Back to Title Screen");
+        btn4.addActionListener(this);
+        btn4.setActionCommand("titleScreen");
 
         JButton btn3 = new JButton("Save Game");
         btn3.addActionListener(this);
         btn3.setActionCommand("saveGame");
         JPanel btn3Panel = new JPanel();
-        btn3Panel.setSize(WIDTH / 9, HEIGHT / 9);
-        btn3Panel.setLocation(100,300);
+        btn3Panel.setSize(WIDTH / 5, HEIGHT / 5);
+        btn3Panel.setLocation(100, 300);
         btn3Panel.add(btn3);
+        btn3Panel.add(btn4);
 
-        JButton btn4 = new JButton("Go Back to Title Screen");
-        btn4.addActionListener(this);
-        btn4.setActionCommand("titleScreen");
-        JPanel btn4Panel = new JPanel();
-        btn4Panel.setBounds(WIDTH / 5, HEIGHT / 5, WIDTH / 10, HEIGHT / 10);
-        btn4Panel.add(btn4);
+
+        //JPanel btn4Panel = new JPanel();
+        //btn4Panel.setBounds(WIDTH / 5, HEIGHT / 5, WIDTH / 10, HEIGHT / 10);
+        //btn4Panel.add(btn4);
 
         frame.add(labelPanel, BorderLayout.PAGE_START);
         frame.add(btn1Panel, BorderLayout.EAST);
         frame.add(btn2Panel, BorderLayout.WEST);
-        frame.add(btn3Panel, BorderLayout.CENTER);
-        frame.add(btn4Panel, BorderLayout.SOUTH);
+        frame.add(btn3Panel, BorderLayout.PAGE_END);
+        //frame.add(btn4Panel, BorderLayout.PAGE_END);
         frame.setVisible(true);
 
     }
@@ -257,16 +279,36 @@ public class GameApp extends JPanel implements ActionListener {
         input = new Scanner(System.in);
         stage = "p1s1c1";
         game.setProgress(stage);
+        game.addItem(cheeseSlice);
+
+        ImageIcon icon = new ImageIcon("src/main/ui/images/icon.jpg");
 
         JFrame frame = new JFrame();
         frame.setSize(WIDTH, HEIGHT);
+        JLabel imgLabel = new JLabel();
+        imgLabel.setSize(400, 400);
+        imgLabel.setIcon(icon);
+        imgLabel.setLayout(new BorderLayout());
+        imgLabel.setOpaque(false);
+        frame.setContentPane(imgLabel);
 
         JLabel label1 = new JLabel();
         label1.setText("Do you take another one?");
         label1.setSize(25, 25);
         JPanel labelPanel = new JPanel();
-        labelPanel.setBounds(WIDTH - WIDTH, HEIGHT - HEIGHT, WIDTH, HEIGHT);
+        labelPanel.setBounds(0, 0, WIDTH, HEIGHT);
         labelPanel.add(label1);
+
+
+        list = new JList(listModel);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane listScrollPane = new JScrollPane(list);
+        listScrollPane.setSize(200, 200);
+        listScrollPane.setVisible(true);
+
+        JPanel listPanel = new JPanel();
+        listPanel.setSize(250, 250);
+        listPanel.add(listScrollPane);
 
         JButton btn1 = new JButton("Yes!");
         btn1.addActionListener(this);
@@ -280,7 +322,7 @@ public class GameApp extends JPanel implements ActionListener {
         btn2.setActionCommand("p2s1c0");
         JPanel btn2Panel = new JPanel();
         btn2Panel.setSize(WIDTH / 10, HEIGHT / 10);
-        btn2Panel.setLocation(100,200);
+        btn2Panel.setLocation(100, 200);
         btn2Panel.add(btn2);
 
         JButton btn3 = new JButton("Save Game");
@@ -288,7 +330,7 @@ public class GameApp extends JPanel implements ActionListener {
         btn3.setActionCommand("saveGame");
         JPanel btn3Panel = new JPanel();
         btn3Panel.setSize(WIDTH / 9, HEIGHT / 9);
-        btn3Panel.setLocation(100,300);
+        btn3Panel.setLocation(100, 300);
         btn3Panel.add(btn3);
 
         JButton btn4 = new JButton("Go Back to Title Screen");
@@ -298,29 +340,26 @@ public class GameApp extends JPanel implements ActionListener {
         btn4Panel.setBounds(WIDTH / 5, HEIGHT / 5, WIDTH / 10, HEIGHT / 10);
         btn4Panel.add(btn4);
 
-        JButton btn5 = new JButton("Show Inventory");
+        JButton btn5 = new JButton("Clear Inventory");
         btn5.addActionListener(this);
-        btn5.setActionCommand("showInventory");
+        btn5.setActionCommand("clearInventory");
         JPanel btn5Panel = new JPanel();
-        btn5Panel.setBounds(WIDTH / 6, HEIGHT / 6, WIDTH / 10, HEIGHT  / 10);
+        btn5Panel.setBounds(WIDTH / 6, HEIGHT / 6, WIDTH / 10, HEIGHT / 10);
+        btn5Panel.add(btn3);
+        btn5Panel.add(btn4);
         btn5Panel.add(btn5);
 
         frame.add(labelPanel, BorderLayout.PAGE_START);
         frame.add(btn1Panel, BorderLayout.EAST);
         frame.add(btn2Panel, BorderLayout.WEST);
-        frame.add(btn3Panel, BorderLayout.CENTER);
-        frame.add(btn4Panel, BorderLayout.SOUTH);
+        //frame.add(btn3Panel, BorderLayout.CENTER);
+        //frame.add(btn4Panel, BorderLayout.SOUTH);
         frame.add(btn5Panel, BorderLayout.PAGE_END);
+        frame.add(listPanel);
         frame.setVisible(true);
 
     }
 
-    private String getListOfItems() {
-        for (Item item : game.getItems()) {
-            return item.getName();
-        }
-        return null;
-    }
 
     //EFFECTS: saves progress and list of items collected
     private void saveGame() {
@@ -339,6 +378,10 @@ public class GameApp extends JPanel implements ActionListener {
     private void loadGame() {
         try {
             game = jsonReader.read();
+            listModel = new DefaultListModel();
+            for (int i = game.itemsSize() - 1; i > 0; i--) {
+                listModel.addElement(cheeseSlice.getName());
+            }
             switch (game.getProgress()) {
                 case "p0s0c0":
                     p0s0c0();
@@ -367,13 +410,14 @@ public class GameApp extends JPanel implements ActionListener {
         System.out.println("You Die. The End.");
     }
 
+    //EFFECTS: runs appropriate code based on button pressed
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void actionPerformed(ActionEvent e) {
 
         switch (e.getActionCommand()) {
             case "TitleChoice1":
-                this.runGame();
+                p0s0c0();
                 break;
             case "TitleChoice2":
                 loadGame();
@@ -382,14 +426,16 @@ public class GameApp extends JPanel implements ActionListener {
                 p0s0c0();
                 break;
             case "p1s1c0":
-                game.addItem(cheeseSlice);
                 p1s1c0();
                 break;
             case "p1s1c1":
+                listModel.addElement(cheeseSlice.getName());
                 p1s1c1();
                 break;
-            case "showInventory":
-                getListOfItems();
+            case "clearInventory":
+                listModel.clear();
+                game.clearItems();
+                p1s1c1();
             case "p2s1c0":
                 p2s1c0();
                 break;

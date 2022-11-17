@@ -21,7 +21,7 @@ public class GameData implements Writable {
     // the third number represents what choice in the stage the player chooses
     // example: "p1s1c1" is the first path in the first stage with player choosing choice 1
     private String progress;
-    private List<Item> items;
+    private static List<Item> items;
 
     //EFFECTS: constructs game data with an empty list and empty progress
     public GameData(String currentStage) {
@@ -29,8 +29,12 @@ public class GameData implements Writable {
         items = new ArrayList<>();
     }
 
-    public List<Item> getItems() {
+    public static List<Item> getItems() {
         return Collections.unmodifiableList(items);
+    }
+
+    public int itemsSize() {
+        return items.size();
     }
 
 
@@ -42,6 +46,10 @@ public class GameData implements Writable {
 
     public String getProgress() {
         return progress;
+    }
+
+    public void clearItems() {
+        items.clear();
     }
 
     //EFFECTS: sets progress of game to currentProgress
@@ -68,5 +76,16 @@ public class GameData implements Writable {
         }
         return jsonArray;
     }
+
+    public List<String> getListOfItems() {
+        List<String> names = new ArrayList<>();
+        for (Item item : GameData.getItems()) {
+            String name = item.getName();
+            names.add(name);
+            return names;
+        }
+        return names;
+    }
+
 
 }
