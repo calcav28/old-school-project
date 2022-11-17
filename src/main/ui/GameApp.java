@@ -53,8 +53,16 @@ public class GameApp extends JPanel implements ActionListener {
         questionLabel.setHorizontalAlignment(JLabel.CENTER);
         questionLabel.setVerticalAlignment(JLabel.TOP);
 
+        JPanel questionPanel = new JPanel();
+        questionPanel.setSize(100, 100);
+        questionPanel.setAlignmentX(200);
+        questionPanel.setAlignmentY(200);
+        questionPanel.add(questionLabel);
+
         JButton btn1 = new JButton("1. Start New Game");
         btn1.addActionListener(this);
+        btn1.setHorizontalAlignment(JLabel.CENTER);
+        btn1.setVerticalAlignment(JLabel.CENTER);
         JButton btn2 = new JButton("2. Load Saved Game");
         btn2.setBounds(90, 90, 10, 10);
         btn2.addActionListener(this);
@@ -82,48 +90,45 @@ public class GameApp extends JPanel implements ActionListener {
         frame.setSize(500, 500);
         frame.setTitle("Welcome to the game!");
         frame.setResizable(false);
-        btn1.setActionCommand("Choice1");
-        btn2.setActionCommand("Choice2");
-        btn3.setActionCommand("Choice3");
-        frame.add(questionLabel);
+        btn1.setActionCommand("TitleChoice1");
+        btn2.setActionCommand("TitleChoice2");
+        btn3.setActionCommand("TitleChoice3");
+        frame.add(questionPanel);
         btn1.setHorizontalAlignment(JLabel.CENTER);
         btn1.setVerticalAlignment(JLabel.CENTER);
         frame.add(buttonFrame1, BorderLayout.NORTH);
         frame.add(buttonFrame2, BorderLayout.CENTER);
         frame.add(buttonFrame3, BorderLayout.SOUTH);
-        //frame.add(btn3);
         frame.setVisible(true);
-
-
-
-        choice = input.nextInt();
-
-        switch (choice) {
-            case 1:
-                runGame();
-                break;
-            case 2:
-                loadGame();
-                break;
-            case 3:
-                System.out.println("Have a nice day!");
-                break;
-            default:
-                runGame();
-        }
     }
 
 
     //EFFECTS: runs the Game application and asks player to input name
     public void runGame() {
-        input = new Scanner(System.in);
+        //input = new Scanner(System.in);
         cheeseSlice = new Item("Cheese Slice", 0, 1);
 
+        JFrame frame = new JFrame();
+        frame.setSize(500, 500);
+        frame.setTitle("Please Input Your Name:");
+        frame.setResizable(false);
 
-        System.out.println("Welcome to the game! Please enter your name.");
-        playerName = input.next();
-        System.out.println("Welcome, " + playerName + "! Let's get started!");
-        p0s0c0();
+        playerNameInput = new JTextField(5);
+        playerNameInput.addActionListener(this);
+
+        JButton btn1 = new JButton("Start Game");
+        btn1.setActionCommand("StartGame");
+        btn1.addActionListener(this);
+
+        JPanel nameInputFrame = new JPanel();
+        nameInputFrame.setSize(250, 250);
+        nameInputFrame.add(playerNameInput);
+        nameInputFrame.add(btn1);
+
+
+        frame.add(nameInputFrame);
+        frame.setVisible(true);
+
     }
 
     //EFFECTS: first section for player after inputting name
@@ -135,41 +140,64 @@ public class GameApp extends JPanel implements ActionListener {
         stage = "p0s0c0";
         game.setProgress(stage);
 
-        System.out.println("You are inside a spaceship. The Captain wants you to get rid of our cargo.");
-        System.out.println("The Captain said that the cargo is to the right. Which way do you go?");
-        System.out.println("1. Right");
-        System.out.println("2. Left");
-        System.out.println("3. Save Progress");
-        System.out.println("4. Show Items");
-        System.out.println("5. Go Back to Title Screen");
-        System.out.println("6. End Game");
-        choice = input.nextInt();
+        JFrame frame = new JFrame();
+        frame.setSize(1000, 1000);
 
-        switch (choice) {
-            case 1:
-                p1s1c0();
-                break;
-            case 2:
-                p2s1c0();
-                break;
-            case 3:
-                saveGame();
-                break;
-            case 4:
-                for (Item item : game.getItems()) {
-                    System.out.println(item.getName());
-                }
-                p0s0c0();
-                break;
-            case 5:
-                runGame();
-                break;
-            case 6:
-                System.out.println("Have a nice day!");
-                break;
-            default:
-                p0s0c0();
-        }
+
+        JLabel label1 = new JLabel();
+        label1.setText("You are inside a spaceship. The captain wants you to get rid of our cargo.");
+        label1.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        JLabel label2 = new JLabel();
+        label2.setText("The Captain said that the cargo is to the right. Which way do you go?");
+
+        JPanel labelPanel = new JPanel();
+        labelPanel.setSize(600, 600);
+        labelPanel.setLocation(500, 50);
+        labelPanel.add(label1);
+        //labelPanel.add(label2);
+
+
+        JButton btn1 = new JButton("1. Right");
+        btn1.addActionListener(this);
+        btn1.setActionCommand("p1s1c0");
+        JPanel btn1Panel = new JPanel();
+        btn1Panel.setSize(600, 100);
+        btn1Panel.setLocation(100,400);
+        btn1Panel.add(btn1);
+        btn1Panel.add(label1);
+
+        JButton btn2 = new JButton("2. Left");
+        btn2.addActionListener(this);
+        btn2.setActionCommand("p2s1c0");
+        JPanel btn2Panel = new JPanel();
+        btn2Panel.setSize(100, 100);
+        btn2Panel.setLocation(100,500);
+        btn2Panel.add(btn2);
+
+        JButton btn3 = new JButton("3. Save Game");
+        btn3.addActionListener(this);
+        btn3.setActionCommand("saveGame");
+        JPanel btn3Panel = new JPanel();
+        btn3Panel.setSize(100, 100);
+        btn3Panel.setLocation(300,600);
+        btn3Panel.add(btn3);
+
+        JButton btn4 = new JButton("4. Go Back to Title Screen");
+        btn4.addActionListener(this);
+        btn4.setActionCommand("titleScreen");
+        JPanel btn4Panel = new JPanel();
+        btn4Panel.setSize(100, 100);
+        btn4Panel.setLocation(400,700);
+        btn4Panel.add(btn4);
+
+        frame.add(labelPanel);
+        frame.add(btn1Panel);
+        frame.add(btn2Panel);
+        frame.add(btn3Panel);
+        frame.add(btn4Panel);
+        frame.setVisible(true);
+
     }
 
     //EFFECTS: choice if player goes right from p0s0c0
@@ -294,14 +322,34 @@ public class GameApp extends JPanel implements ActionListener {
         System.out.println("You Die. The End.");
     }
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Choice1")) {
-            runGame();
-        } else if (e.getActionCommand().equals("Choice2")) {
-            loadGame();
-        } else {
-            System.out.println("Goodbye!");
+
+        switch (e.getActionCommand()) {
+            case "TitleChoice1":
+                this.runGame();
+                break;
+            case "TitleChoice2":
+                loadGame();
+                break;
+            case "StartGame":
+                p0s0c0();
+                break;
+            case "p1s1c0":
+                p1s1c0();
+                break;
+            case "p2s1c0":
+                p2s1c0();
+                break;
+            case "saveGame":
+                saveGame();
+                break;
+            case "titleScreen":
+                new GameApp();
+                break;
+            default:
+                System.out.println("Goodbye!");
         }
     }
 }
