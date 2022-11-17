@@ -5,8 +5,16 @@ import model.Item;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import java.util.Scanner;
 
@@ -14,7 +22,7 @@ import java.util.Scanner;
 //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 //represents the user interface for the game utilizing the other classes for information
-public class GameApp {
+public class GameApp extends JPanel implements ActionListener {
     private Scanner input;
     private static final String JSON_STORE = "./data/gamedata.json";
     private String playerName;
@@ -25,24 +33,68 @@ public class GameApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+    private JLabel questionLabel;
+    private JTextField playerNameInput;
+    private JTextField playerNumberInput;
+
+    //Starts the player at a title screen
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public GameApp() {
+        super(Boolean.parseBoolean("Video Game"));
         stage = "";
         game = new GameData(stage);
 
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        titleScreen();
-    }
-
-    //represents the title screen the player arrives at when they start the game
-    public void titleScreen() {
         input = new Scanner(System.in);
         choice = 0;
 
-        System.out.println("Hello. What would you like to do?");
-        System.out.println("1. Start New Game");
-        System.out.println("2. Load Saved Game");
-        System.out.println("3. Close Game");
+        questionLabel = new JLabel("Hello. What would you like to do?");
+        questionLabel.setHorizontalAlignment(JLabel.CENTER);
+        questionLabel.setVerticalAlignment(JLabel.TOP);
+
+        JButton btn1 = new JButton("1. Start New Game");
+        btn1.addActionListener(this);
+        JButton btn2 = new JButton("2. Load Saved Game");
+        btn2.setBounds(90, 90, 10, 10);
+        btn2.addActionListener(this);
+        btn2.setHorizontalAlignment(JLabel.CENTER);
+        btn2.setVerticalAlignment(JLabel.CENTER);
+        JButton btn3 = new JButton("3. Close Game");
+        btn3.setBounds(80, 80, 10, 10);
+        btn3.addActionListener(this);
+        btn3.setHorizontalAlignment(JLabel.CENTER);
+        btn3.setVerticalAlignment(JLabel.CENTER);
+
+        JPanel buttonFrame1 = new JPanel();
+        buttonFrame1.setSize(100, 100);
+        buttonFrame1.add(btn1);
+
+        JPanel buttonFrame2 = new JPanel();
+        buttonFrame2.setSize(100, 100);
+        buttonFrame2.add(btn2);
+
+        JPanel buttonFrame3 = new JPanel();
+        buttonFrame3.setSize(100, 100);
+        buttonFrame3.add(btn3);
+
+        JFrame frame = new JFrame();
+        frame.setSize(500, 500);
+        frame.setTitle("Welcome to the game!");
+        frame.setResizable(false);
+        btn1.setActionCommand("Choice1");
+        btn2.setActionCommand("Choice2");
+        btn3.setActionCommand("Choice3");
+        frame.add(questionLabel);
+        btn1.setHorizontalAlignment(JLabel.CENTER);
+        btn1.setVerticalAlignment(JLabel.CENTER);
+        frame.add(buttonFrame1, BorderLayout.NORTH);
+        frame.add(buttonFrame2, BorderLayout.CENTER);
+        frame.add(buttonFrame3, BorderLayout.SOUTH);
+        //frame.add(btn3);
+        frame.setVisible(true);
+
+
 
         choice = input.nextInt();
 
@@ -57,9 +109,10 @@ public class GameApp {
                 System.out.println("Have a nice day!");
                 break;
             default:
-                titleScreen();
+                runGame();
         }
     }
+
 
     //EFFECTS: runs the Game application and asks player to input name
     public void runGame() {
@@ -109,7 +162,7 @@ public class GameApp {
                 p0s0c0();
                 break;
             case 5:
-                titleScreen();
+                runGame();
                 break;
             case 6:
                 System.out.println("Have a nice day!");
@@ -143,7 +196,7 @@ public class GameApp {
                 nextRoom();
                 break;
             case 3:
-                titleScreen();
+                runGame();
                 break;
             case 4:
                 saveGame();
@@ -189,7 +242,7 @@ public class GameApp {
                 p1s1c1();
                 break;
             case 5:
-                titleScreen();
+                runGame();
                 break;
             default:
                 p1s1c1();
@@ -241,4 +294,14 @@ public class GameApp {
         System.out.println("You Die. The End.");
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("Choice1")) {
+            runGame();
+        } else if (e.getActionCommand().equals("Choice2")) {
+            loadGame();
+        } else {
+            System.out.println("Goodbye!");
+        }
+    }
 }
