@@ -379,7 +379,7 @@ public class GameApp extends JPanel implements ActionListener {
         try {
             game = jsonReader.read();
             listModel = new DefaultListModel();
-            for (int i = game.itemsSize() - 1; i > 0; i--) {
+            for (int i = game.itemsSize(); i > 0; i--) {
                 listModel.addElement(cheeseSlice.getName());
             }
             switch (game.getProgress()) {
