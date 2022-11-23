@@ -1,4 +1,20 @@
 {
      "progress": "p1s1c1",
-     "items": []
+     "items": [
+          {
+               "itemDamage": 0,
+               "itemName": "Cheese Slice",
+               "itemWeight": 1
+          },
+          {
+               "itemDamage": 0,
+               "itemName": "Cheese Slice",
+               "itemWeight": 1
+          },
+          {
+               "itemDamage": 0,
+               "itemName": "Cheese Slice",
+               "itemWeight": 1
+          }
+     ]
 }

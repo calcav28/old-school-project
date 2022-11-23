@@ -35,4 +35,10 @@ class GameDataTest {
         testGameData.addItem(item2);
         assertEquals(baselineList, testGameData.getItems());
     }
+
+    @Test
+    void testSetProgress() {
+        testGameData.setProgress("tester");
+        assertEquals("tester", testGameData.getProgress());
+    }
 }

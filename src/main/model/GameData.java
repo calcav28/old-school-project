@@ -6,7 +6,9 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
 
 //json elements of file are modelled after code in WorkRoomApp class from:
 //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
@@ -19,18 +21,21 @@ public class GameData implements Writable {
     // the third number represents what choice in the stage the player chooses
     // example: "p1s1c1" is the first path in the first stage with player choosing choice 1
     private String progress;
-    private List<Item> items;
+    private static List<Item> items;
 
     //EFFECTS: constructs game data with an empty list and empty progress
     public GameData(String currentStage) {
-        this.progress = currentStage;
+        progress = currentStage;
         items = new ArrayList<>();
     }
 
-    public List<Item> getItems() {
-        return items;
+    public static List<Item> getItems() {
+        return Collections.unmodifiableList(items);
     }
 
+    public int itemsSize() {
+        return items.size();
+    }
 
     //EFFECTS: adds an item to a list of items
     //MODIFIES: item
@@ -42,6 +47,18 @@ public class GameData implements Writable {
         return progress;
     }
 
+    //EFFECTS: clears all items in gameData
+    public void clearItems() {
+        items.clear();
+    }
+
+    //EFFECTS: sets progress of game to currentProgress
+    //MODIFIES: progress
+    public void setProgress(String currentProgress) {
+        progress = currentProgress;
+    }
+
+    //EFFECTS: writes objects to Json
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -59,5 +76,6 @@ public class GameData implements Writable {
         }
         return jsonArray;
     }
+
 
 }
