@@ -57,3 +57,14 @@ Item added!
 
 
 Process finished with exit code 0
+
+# Phase 4: Task 3
+For most of my classes, such as the ones in model and persistence, I would not refactor anything.
+However, I would heavily refactor my GameApp class. Here is what I would change:
+- Make each "level" (such as p0s0c0()) into objects by making a new class in model.
+This would also help with scaling up my program with more levels.
+This would also allow me to write each level as a JSON file and then 
+- Remove duplicated JFrame constructors in each method by having one instance of it before the constructor.
+
+I feel that for GameApp, I went for the easy solution instead of the best solution. As long as it worked right now, it was good enough for me.
+For future projects, I want to develop good programming and design habits so my code is the best it can be.
