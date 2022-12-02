@@ -1,5 +1,7 @@
 package ui;
 
+import model.EventLog;
+
 import javax.swing.*;
 import java.awt.*;
 

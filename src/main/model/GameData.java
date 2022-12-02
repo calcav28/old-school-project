@@ -41,6 +41,7 @@ public class GameData implements Writable {
     //MODIFIES: item
     public void addItem(Item item) {
         items.add(item);
+        EventLog.getInstance().logEvent(new Event("Item added!"));
     }
 
     public String getProgress() {

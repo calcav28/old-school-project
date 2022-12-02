@@ -2,10 +2,13 @@ package ui;
 
 import model.GameData;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import model.Item;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -47,6 +50,7 @@ public class GameApp extends JPanel implements ActionListener {
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 800;
+
 
 
     //Starts the player at a title screen
@@ -284,6 +288,16 @@ public class GameApp extends JPanel implements ActionListener {
         ImageIcon icon = new ImageIcon("src/main/ui/images/icon.jpg");
 
         JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                for (model.Event ev : EventLog.getInstance()) {
+                    System.out.println(ev.toString() + "\n");
+                }
+                System.exit(0);
+            }
+        });
         frame.setSize(WIDTH, HEIGHT);
         JLabel imgLabel = new JLabel();
         imgLabel.setSize(400, 400);
@@ -450,3 +464,4 @@ public class GameApp extends JPanel implements ActionListener {
         }
     }
 }
+

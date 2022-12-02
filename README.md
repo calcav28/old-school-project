@@ -43,3 +43,17 @@ That will add one X to Y.
 - You can save the state of my application by clicking save game at any point in the game after the opening screen
 - You can reload the state of my application by going back to the title screen (clicking the button on screen or closing application)
 and then clicking "Load Saved Game" at the top left
+
+# Phase 4: Task 2
+/Users/calcav/Library/Java/JavaVirtualMachines/corretto-11.0.17/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=61627:/Applications/IntelliJ IDEA CE.app/Contents/bin -Dfile.encoding=UTF-8 -classpath /Users/calcav/IdeaProjects/project_o5g7z/out/production/Project-Starter:/Users/calcav/IdeaProjects/project_o5g7z/lib/json-20210307.jar ui.Main
+Fri Dec 02 02:17:18 PST 2022
+Item added!
+
+Fri Dec 02 02:17:19 PST 2022
+Item added!
+
+Fri Dec 02 02:17:19 PST 2022
+Item added!
+
+
+Process finished with exit code 0
